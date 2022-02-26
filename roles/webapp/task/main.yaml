@@ -18,13 +18,13 @@
 - name: Clone of a single branch
   ansible.builtin.git:
     repo: https://github.com/SathishkumarDemoProject1/VideoCropper.git
-    dest: /src/video-cropper
+    dest: /root/ansible_terraform/aws_instance/video-cropper
     single_branch: yes
     version: master
 
-- name: starting the application
+- name: Starting the application
     shell: |                    # Multiple commands in Ansible shell module
-        cd /src/video-cropper
+        cd /root/ansible_terraform/aws_instance/video-cropper
         sh setup.sh
         sh startserver.sh
         
