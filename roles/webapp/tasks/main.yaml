@@ -32,6 +32,6 @@
 
 - name: Starting the application
   shell: |                    # Multiple commands in Ansible shell module
-     cd /home/ubuntu/terraform-ansible/video-cropper
-     sudo sh setup.sh
-     sudo sh startserver.sh
+     cd /home/ubuntu/terraform-ansible/video-cropper;
+     sudo sh setup.sh;
+     sudo sh startserver.sh;
