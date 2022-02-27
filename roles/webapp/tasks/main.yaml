@@ -1,12 +1,4 @@
 ---
-- name: install nodejs prerequisites
-  apt:
-    name:
-      - apt-transport-https
-      - gcc
-      - g++
-      - make
-    state: present
 - name: Install the gpg key for nodejs LTS
   apt_key:
     url: "https://deb.nodesource.com/gpgkey/nodesource.gpg.key"
