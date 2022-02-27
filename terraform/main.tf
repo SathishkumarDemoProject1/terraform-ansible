@@ -104,9 +104,13 @@ resource "aws_lb_listener_rule" "static" {
   }
   condition {
     host_header {
-      values = ["*.com"]
+      values = ["*"]
     }
   }
+}
+
+output "InstanceIps" {
+  value = aws_instance.webservers.*.public_ip
 }
 
 
