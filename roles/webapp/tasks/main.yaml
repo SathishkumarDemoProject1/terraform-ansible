@@ -24,10 +24,10 @@
     state: present
 
 - name: Clone of a single branch
-  ansible.builtin.git:
+  git:
     repo: https://github.com/SathishkumarDemoProject1/VideoCropper.git
     dest: /home/ubuntu/terraform-ansible/video-cropper
-    single_branch: yes
+    clone: yes
     version: master
 
 - name: Starting the application
