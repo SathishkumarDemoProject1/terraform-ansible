@@ -44,5 +44,5 @@
   changed_when: false
 
 - name: "Start example Node.js app."
-  command: forever start -c "node server/server.js" /home/ubuntu/terraform-ansible/video-cropper
+  command: forever start /home/ubuntu/terraform-ansible/video-cropper/server/server.js
   when: "forever_list.stdout.find('/home/ubuntu/terraform-ansible/video-cropper/server/server.js') == -1"
