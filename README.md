@@ -22,4 +22,5 @@ Note down the Ip list
 Configure your application with ansible
 1. update inventory file with above IP.
 2. update demo.pem with your demo.pem.
-3. `ansible-playbook main.yaml`
+3. `chmod 400 demo.pem`
+4. `ansible-playbook main.yaml`
