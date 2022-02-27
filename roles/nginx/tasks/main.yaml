@@ -18,3 +18,5 @@
     daemon_reload: yes
     enabled: yes
     state: started
+- name: restart nginx
+  service: name=nginx state=restarted enabled=yes
