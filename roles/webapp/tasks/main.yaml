@@ -34,4 +34,15 @@
   shell: |                    # Multiple commands in Ansible shell module
      cd /home/ubuntu/terraform-ansible/video-cropper;
      sudo sh setup.sh;
-     sudo sh startserver.sh;
+     
+- name: "Install forever (to run Node.js app)."
+  npm: name=forever global=yes state=present
+
+- name: "Check list of Node.js apps running."
+  command: forever list
+  register: forever_list
+  changed_when: false
+
+- name: "Start example Node.js app."
+  command: forever start -c "node server/server.js" /home/ubuntu/terraform-ansible/video-cropper
+  when: "forever_list.stdout.find('/home/ubuntu/terraform-ansible/video-cropper/server/server.js') == -1"
