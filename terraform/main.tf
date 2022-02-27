@@ -10,24 +10,33 @@ resource "aws_instance" "webservers" {
   ami = "ami-033b95fb8079dc481"
   instance_type = "t3.nano"
   key_name = "demo"
-	subnet_id  = "subnet-7a55f41c"
-	security_groups =  [ "sg-0b5677b7dca4a0f57" ]
+	subnet_id  = data.aws_subnets.subnets.ids[0]
+	security_groups =  [ aws_security_group.sg.id ]
 	tags = {
             Name = "webserver${count.index}"
     }
 }
 
 resource "local_file" "ip" {
-  content  = "${aws_instance.webservers[0].public_ip} \n ${aws_instance.webservers[1].public_ip}"
+  content  = "${aws_instance.webservers[0].public_ip}\n${aws_instance.webservers[1].public_ip}"
   filename = "ip.txt"
+}
+
+output "InstanceIps" {
+  value = aws_instance.webservers.*.public_ip
 }
 
 
 data "aws_subnets" "subnets" {
   filter {
     name   = "vpc-id"
-    values = ["vpc-c026dbbd"]
+    values = [ var.vpc_id ]
   }
+}
+
+variable "vpc_id" {
+  type = string
+  default = "vpc-c026dbbd"
 }
 
 
@@ -40,7 +49,7 @@ resource "aws_lb_target_group" "tg" {
   port        = 80
   target_type = "instance"
   protocol    = "HTTP"
-  vpc_id      = "vpc-c026dbbd"
+  vpc_id      = var.vpc_id
 }
 
 ####################################################
@@ -104,13 +113,9 @@ resource "aws_lb_listener_rule" "static" {
   }
   condition {
     host_header {
-      values = ["*"]
+      values = ["*.com"]
     }
   }
-}
-
-output "InstanceIps" {
-  value = aws_instance.webservers.*.public_ip
 }
 
 
@@ -139,7 +144,7 @@ resource "aws_security_group" "sg" {
 
   name        = "CustomSG"
   description = "Allow TLS inbound traffic"
-  vpc_id      = "vpc-c026dbbd"
+  vpc_id      = var.vpc_id
   egress = [
     {
       description      = "for all outgoing traffics"
