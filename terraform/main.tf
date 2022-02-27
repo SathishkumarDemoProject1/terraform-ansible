@@ -1,20 +1,20 @@
 provider "aws" {
   region = "us-east-1"
 	version = "3.61.0"
-	access_key = "AKIASQEYJANO65ZJJJXM"
-  secret_key = "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"
+	access_key = "123446556cvcvc"
+  	secret_key = "sdsfs2335455"
 }
 
 resource "aws_instance" "webservers" {
 	count = 2
-  ami = "ami-033b95fb8079dc481"
-  instance_type = "t3.nano"
-  key_name = "demo"
+	ami = "ami-0e472ba40eb589f49"
+	instance_type = "t3.nano"
+	key_name = "demo"
 	subnet_id  = data.aws_subnets.subnets.ids[0]
 	security_groups =  [ aws_security_group.sg.id ]
 	tags = {
-            Name = "webserver${count.index}"
-    }
+	    Name = "webserver${count.index}"
+	}
 }
 
 resource "local_file" "ip" {
