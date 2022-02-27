@@ -8,6 +8,9 @@
       src: server1.conf
       dest: /etc/nginx/conf.d/default.conf
       mode: 0755
+- name: update config
+  shell: |                    # Multiple commands in Ansible shell module
+     mv /etc/nginx/conf.d/default.conf /etc/nginx/sites-available/default
 - name: Enable Nginx service
   systemd:
     name: nginx
