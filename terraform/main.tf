@@ -1,15 +1,15 @@
 provider "aws" {
-    region = "us-east-1"
+  region = "us-east-1"
 	version = "3.61.0"
 	access_key = "AKIASQEYJANO65ZJJJXM"
-    secret_key = "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"
+  secret_key = "/fLOdcyAVA+GoQJ+SVxoAJTR13RQ33pncULCnzKQ"
 }
 
 resource "aws_instance" "webservers" {
 	count = 2
-    ami = "ami-033b95fb8079dc481"
-    instance_type = "t3.nano"
-    key_name = "demo"
+  ami = "ami-033b95fb8079dc481"
+  instance_type = "t3.nano"
+  key_name = "demo"
 	subnet_id  = "subnet-7a55f41c"
 	security_groups =  [ "sg-0b5677b7dca4a0f57" ]
 	tags = {
@@ -18,8 +18,8 @@ resource "aws_instance" "webservers" {
 }
 
 resource "local_file" "ip" {
-    content  = "${aws_instance.webservers[0].public_ip} \n ${aws_instance.webservers[1].public_ip}"
-    filename = "ip.txt"
+  content  = "${aws_instance.webservers[0].public_ip} \n ${aws_instance.webservers[1].public_ip}"
+  filename = "ip.txt"
 }
 
 

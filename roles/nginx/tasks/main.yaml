@@ -1,0 +1,16 @@
+---
+- name: Install Nginx
+  apt:
+    name: nginx
+    state: latest
+- name: Copy nginx conf
+  copy:
+      src: server1.conf
+      dest: /etc/nginx/conf.d/default.conf
+      mode: 0755
+- name: Enable Nginx service
+  systemd:
+    name: nginx
+    daemon_reload: yes
+    enabled: yes
+    state: started
