@@ -9,18 +9,18 @@ Create infra with terraform.
 Prerequsites:
 1. get access_key and secret_key from aws.
 2. create a key-pair "demo" in aws and download the private key file "demo.pem"
-update access_key and secret_key in main.tf
+3. update access_key and secret_key in main.tf
+
 
 1. `cd terraform`
 2. `terraform init`
 3. `terraform plan`
-4. `terraform apply`
+4. `terraform apply -vars="vpc_id={you_vpc_id}"`
 5. `cd ../`
 
 Note down the Ip list
 
 Configure your application with ansible
-1. update inventory file with above IP.
-2. update demo.pem with your demo.pem.
-3. `chmod 400 demo.pem`
-4. `ansible-playbook main.yaml`
+1. update demo.pem with your demo.pem.
+2. `chmod 400 demo.pem`
+3. `ansible-playbook main.yaml`
