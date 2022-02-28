@@ -75,6 +75,11 @@ resource "aws_lb" "lb" {
   subnets            = data.aws_subnets.subnets.ids
 }
 
+output "lb_details" {
+  description = "alb dns"
+  value       = aws_lb.lb.dns_name
+}
+
 ####################################################
 # Listner
 ####################################################
